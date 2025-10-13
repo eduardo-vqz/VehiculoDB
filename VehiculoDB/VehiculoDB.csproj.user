@@ -4,7 +4,13 @@
     <Compile Update="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formularios\FromsPropietario\frmActualizarPropietario.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formularios\FromsPropietario\frmPropietario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formularios\FromsPropietario\frmInsertarPropietario.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

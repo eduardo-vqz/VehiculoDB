@@ -9,6 +9,8 @@
         private string telefono;
         private string direccion;
 
+        
+
         public int IdPropietario { get => idPropietario; set => idPropietario = value; }
         public string Nombre { get => nombre; set => nombre = value; }
         public string Apellido { get => apellido; set => apellido = value; }

@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             dgvPropietario = new DataGridView();
+            bntCerrar = new Button();
+            btnEdiarPropietario = new Button();
+            btnAgregarPropietario = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPropietario).BeginInit();
             SuspendLayout();
             // 
@@ -39,14 +42,44 @@
             dgvPropietario.Name = "dgvPropietario";
             dgvPropietario.ReadOnly = true;
             dgvPropietario.RowHeadersWidth = 82;
-            dgvPropietario.Size = new Size(1363, 333);
+            dgvPropietario.Size = new Size(1363, 538);
             dgvPropietario.TabIndex = 0;
+            // 
+            // bntCerrar
+            // 
+            bntCerrar.Location = new Point(1428, 425);
+            bntCerrar.Name = "bntCerrar";
+            bntCerrar.Size = new Size(228, 125);
+            bntCerrar.TabIndex = 1;
+            bntCerrar.Text = "Cerrar";
+            bntCerrar.UseVisualStyleBackColor = true;
+            // 
+            // btnEdiarPropietario
+            // 
+            btnEdiarPropietario.Location = new Point(1428, 218);
+            btnEdiarPropietario.Name = "btnEdiarPropietario";
+            btnEdiarPropietario.Size = new Size(228, 125);
+            btnEdiarPropietario.TabIndex = 2;
+            btnEdiarPropietario.Text = "Editar";
+            btnEdiarPropietario.UseVisualStyleBackColor = true;
+            // 
+            // btnAgregarPropietario
+            // 
+            btnAgregarPropietario.Location = new Point(1428, 12);
+            btnAgregarPropietario.Name = "btnAgregarPropietario";
+            btnAgregarPropietario.Size = new Size(228, 125);
+            btnAgregarPropietario.TabIndex = 3;
+            btnAgregarPropietario.Text = "Agregar";
+            btnAgregarPropietario.UseVisualStyleBackColor = true;
             // 
             // frmPropietario
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1396, 450);
+            ClientSize = new Size(1699, 562);
+            Controls.Add(btnAgregarPropietario);
+            Controls.Add(btnEdiarPropietario);
+            Controls.Add(bntCerrar);
             Controls.Add(dgvPropietario);
             Name = "frmPropietario";
             Text = "Propietario";
@@ -58,5 +91,8 @@
         #endregion
 
         private DataGridView dgvPropietario;
+        private Button bntCerrar;
+        private Button btnEdiarPropietario;
+        private Button btnAgregarPropietario;
     }
 }

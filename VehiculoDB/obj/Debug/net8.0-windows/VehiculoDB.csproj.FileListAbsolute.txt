@@ -66,3 +66,6 @@ C:\Users\hervas\Desktop\VehiculoDB\VehiculoDB\VehiculoDB\obj\Debug\net8.0-window
 C:\Users\hervas\Desktop\VehiculoDB\VehiculoDB\VehiculoDB\obj\Debug\net8.0-windows\VehiculoDB.genruntimeconfig.cache
 C:\Users\hervas\Desktop\VehiculoDB\VehiculoDB\VehiculoDB\obj\Debug\net8.0-windows\ref\VehiculoDB.dll
 C:\Users\hervas\Desktop\VehiculoDB\VehiculoDB\VehiculoDB\obj\Debug\net8.0-windows\VehiculoDB.Formularios.FromsPropietario.frmPropietario.resources
+C:\Users\hervas\Desktop\VehiculoDB\VehiculoDB\VehiculoDB\obj\Debug\net8.0-windows\VehiculoDB.sourcelink.json
+C:\Users\hervas\Desktop\VehiculoDB\VehiculoDB\VehiculoDB\obj\Debug\net8.0-windows\VehiculoDB.Formularios.FromsPropietario.frmActualizarPropietario.resources
+C:\Users\hervas\Desktop\VehiculoDB\VehiculoDB\VehiculoDB\obj\Debug\net8.0-windows\VehiculoDB.Formularios.FromsPropietario.frmInsertarPropietario.resources

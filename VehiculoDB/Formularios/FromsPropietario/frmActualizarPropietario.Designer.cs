@@ -33,7 +33,7 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            txtDirección = new TextBox();
+            txtDireccion = new TextBox();
             mtxtTelefono = new MaskedTextBox();
             mtxtDUI = new MaskedTextBox();
             txtApellido = new TextBox();
@@ -89,10 +89,10 @@
             // 
             // txtDirección
             // 
-            txtDirección.Location = new Point(316, 339);
-            txtDirección.Name = "txtDirección";
-            txtDirección.Size = new Size(420, 39);
-            txtDirección.TabIndex = 18;
+            txtDireccion.Location = new Point(316, 339);
+            txtDireccion.Name = "txtDirección";
+            txtDireccion.Size = new Size(420, 39);
+            txtDireccion.TabIndex = 18;
             // 
             // mtxtTelefono
             // 
@@ -141,6 +141,7 @@
             btnActualizar.TabIndex = 12;
             btnActualizar.Text = "Actualizar";
             btnActualizar.UseVisualStyleBackColor = true;
+            btnActualizar.Click += btnActualizar_Click;
             // 
             // frmActualizarPropietario
             // 
@@ -152,7 +153,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(txtDirección);
+            Controls.Add(txtDireccion);
             Controls.Add(mtxtTelefono);
             Controls.Add(mtxtDUI);
             Controls.Add(txtApellido);
@@ -161,6 +162,7 @@
             Controls.Add(btnActualizar);
             Name = "frmActualizarPropietario";
             Text = "Actualizar Propietario";
+            Load += frmActualizarPropietario_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -172,7 +174,7 @@
         private Label label3;
         private Label label2;
         private Label label1;
-        private TextBox txtDirección;
+        private TextBox txtDireccion;
         private MaskedTextBox mtxtTelefono;
         private MaskedTextBox mtxtDUI;
         private TextBox txtApellido;

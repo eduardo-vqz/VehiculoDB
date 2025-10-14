@@ -53,6 +53,7 @@
             bntCerrar.TabIndex = 1;
             bntCerrar.Text = "Cerrar";
             bntCerrar.UseVisualStyleBackColor = true;
+            bntCerrar.Click += bntCerrar_Click;
             // 
             // btnEdiarPropietario
             // 
@@ -62,6 +63,7 @@
             btnEdiarPropietario.TabIndex = 2;
             btnEdiarPropietario.Text = "Editar";
             btnEdiarPropietario.UseVisualStyleBackColor = true;
+            btnEdiarPropietario.Click += btnEdiarPropietario_Click;
             // 
             // btnAgregar
             // 

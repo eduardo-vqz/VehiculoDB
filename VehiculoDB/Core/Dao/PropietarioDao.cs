@@ -117,9 +117,9 @@ namespace VehiculoDB.Core.Dao
                 var id = command.ExecuteScalar();
                 return Convert.ToInt32(id);
             }
-            catch (SqlException ex) when ( ex.Number == 2627 || ex.Number == 2601)
+            catch (SqlException ex) when ( ex.Number == 2627 || ex.Number == 2601 )
             {
-                throw new ApplicationException("El DUI ya existe, verifica la información. ", ex);
+                throw new ApplicationException("El DUI ya existe, verifica la información. " + ex);
             }
             finally {
                 command?.Dispose();

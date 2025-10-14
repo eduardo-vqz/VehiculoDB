@@ -163,6 +163,7 @@
             Controls.Add(btnAgregar);
             Name = "frmInsertarPropietario";
             Text = "Agregar Propietario";
+            Load += frmInsertarPropietario_Load;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -68,7 +68,8 @@ namespace VehiculoDB.Formularios.FromsPropietario
         {
             if (dgvPropietario.CurrentRow == null)
             {
-                MessageBox.Show("Debe seleccionar un registo", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Debe seleccionar un registo", "Aviso", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return null;
             }
 
@@ -97,6 +98,11 @@ namespace VehiculoDB.Formularios.FromsPropietario
                 Cargar();
 
 
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

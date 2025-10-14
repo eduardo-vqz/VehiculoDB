@@ -32,6 +32,7 @@
             bntCerrar = new Button();
             btnEdiarPropietario = new Button();
             btnAgregar = new Button();
+            btnEliminar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPropietario).BeginInit();
             SuspendLayout();
             // 
@@ -42,12 +43,12 @@
             dgvPropietario.Name = "dgvPropietario";
             dgvPropietario.ReadOnly = true;
             dgvPropietario.RowHeadersWidth = 82;
-            dgvPropietario.Size = new Size(1363, 538);
+            dgvPropietario.Size = new Size(1363, 702);
             dgvPropietario.TabIndex = 0;
             // 
             // bntCerrar
             // 
-            bntCerrar.Location = new Point(1428, 425);
+            bntCerrar.Location = new Point(1428, 589);
             bntCerrar.Name = "bntCerrar";
             bntCerrar.Size = new Size(228, 125);
             bntCerrar.TabIndex = 1;
@@ -75,11 +76,22 @@
             btnAgregar.UseVisualStyleBackColor = true;
             btnAgregar.Click += btnAgregar_Click;
             // 
+            // btnEliminar
+            // 
+            btnEliminar.Location = new Point(1428, 415);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(228, 125);
+            btnEliminar.TabIndex = 4;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
+            // 
             // frmPropietario
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1699, 562);
+            ClientSize = new Size(1699, 726);
+            Controls.Add(btnEliminar);
             Controls.Add(btnAgregar);
             Controls.Add(btnEdiarPropietario);
             Controls.Add(bntCerrar);
@@ -97,5 +109,6 @@
         private Button bntCerrar;
         private Button btnEdiarPropietario;
         private Button btnAgregar;
+        private Button btnEliminar;
     }
 }

@@ -42,8 +42,8 @@ namespace VehiculoDB.Formularios.FromsPropietario
 
                 if (id > 0)
                 {
-                    MessageBox.Show("Propietario ingresado con éxito", 
-                        "Éxito", MessageBoxButtons.OK, 
+                    MessageBox.Show("Propietario ingresado con éxito",
+                        "Éxito", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
 
                     DialogResult = DialogResult.OK;
@@ -68,6 +68,11 @@ namespace VehiculoDB.Formularios.FromsPropietario
                 MessageBox.Show("Error inesperado: " + ex.Message, "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+        }
+
+        private void frmInsertarPropietario_Load(object sender, EventArgs e)
+        {
 
         }
     }

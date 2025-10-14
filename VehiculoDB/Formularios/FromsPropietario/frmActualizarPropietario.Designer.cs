@@ -39,7 +39,7 @@
             txtApellido = new TextBox();
             txtNombre = new TextBox();
             btnCerrar = new Button();
-            btnAgregar = new Button();
+            btnActualizar = new Button();
             SuspendLayout();
             // 
             // label5
@@ -133,14 +133,14 @@
             btnCerrar.Text = "Cerrar";
             btnCerrar.UseVisualStyleBackColor = true;
             // 
-            // btnAgregar
+            // btnActualizar
             // 
-            btnAgregar.Location = new Point(140, 414);
-            btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(228, 66);
-            btnAgregar.TabIndex = 12;
-            btnAgregar.Text = "Agregar";
-            btnAgregar.UseVisualStyleBackColor = true;
+            btnActualizar.Location = new Point(140, 414);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.Size = new Size(228, 66);
+            btnActualizar.TabIndex = 12;
+            btnActualizar.Text = "Actualizar";
+            btnActualizar.UseVisualStyleBackColor = true;
             // 
             // frmActualizarPropietario
             // 
@@ -158,7 +158,7 @@
             Controls.Add(txtApellido);
             Controls.Add(txtNombre);
             Controls.Add(btnCerrar);
-            Controls.Add(btnAgregar);
+            Controls.Add(btnActualizar);
             Name = "frmActualizarPropietario";
             Text = "Actualizar Propietario";
             ResumeLayout(false);
@@ -178,6 +178,6 @@
         private TextBox txtApellido;
         private TextBox txtNombre;
         private Button btnCerrar;
-        private Button btnAgregar;
+        private Button btnActualizar;
     }
 }

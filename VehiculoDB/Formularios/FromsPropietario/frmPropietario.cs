@@ -26,12 +26,12 @@ namespace VehiculoDB.Formularios.FromsPropietario
             dgvPropietario.MultiSelect = false;
             dgvPropietario.Columns.Clear();
 
-            dgvPropietario.Columns.Add(new DataGridViewTextBoxColumn 
+            dgvPropietario.Columns.Add(new DataGridViewTextBoxColumn
             { Name = "NombreCol", HeaderText = "Nombre", DataPropertyName = "Nombre", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
-            dgvPropietario.Columns.Add(new DataGridViewTextBoxColumn 
+            dgvPropietario.Columns.Add(new DataGridViewTextBoxColumn
             { Name = "ApellidoCol", HeaderText = "Nombre", DataPropertyName = "Nombre", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
             dgvPropietario.Columns.Add(new DataGridViewTextBoxColumn
-            { Name = "DUICol", HeaderText = "DUI", DataPropertyName = "DUI", Width = 120  });
+            { Name = "DUICol", HeaderText = "DUI", DataPropertyName = "DUI", Width = 120 });
             dgvPropietario.Columns.Add(new DataGridViewTextBoxColumn
             { Name = "TelefonoCol", HeaderText = "Telefono", DataPropertyName = "Telefono", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
             dgvPropietario.Columns.Add(new DataGridViewTextBoxColumn
@@ -48,6 +48,13 @@ namespace VehiculoDB.Formularios.FromsPropietario
         {
             ConfiguracionGrid();
             Cargar();
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            frmInsertarPropietario frm = new frmInsertarPropietario();
+            if (frm.ShowDialog() == DialogResult.OK)
+                Cargar();
         }
     }
 }

@@ -12,7 +12,23 @@ namespace VehiculoDB.Core.Dao
 
         public bool Delete(int idPropietario)
         {
-            throw new NotImplementedException();
+            try 
+            {
+                Con = OpenDb();
+                command = new SqlCommand(@"DELETE FROM Propietarios WHERE IdPropietario = @Id;", Con);
+                command.Parameters.Add("@Id", SqlDbType.Int).Value = idPropietario;
+
+                return command.ExecuteNonQuery() == 1;
+            }
+            catch (SqlException ex) when (ex.Number == 547)
+            { 
+                throw new ApplicationException("No se puede eliminar: " +
+                    "El propietario esta asociado a un vehículo." + ex);
+            }
+            finally { 
+            command?.Dispose();
+                CloseDb();
+            }
         }
 
         public List<Propietario> GetAll(string filtro = "")

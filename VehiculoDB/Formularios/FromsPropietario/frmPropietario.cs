@@ -102,7 +102,54 @@ namespace VehiculoDB.Formularios.FromsPropietario
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            
+            var id = GetIdSeleccionado();
+            if (!id.HasValue)
+            {
+                MessageBox.Show("Seleccione un registro");
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Eliminar" + id.Value);
+            }
+
+            var respuesta = MessageBox.Show(
+                "¿Desea eliminar el registro seleccionado?", 
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (respuesta == DialogResult.No)
+                return;
+
+            try
+            {
+                if (propietarioDao.Delete(id.Value))
+                {
+                    Cargar();
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo eliminar el registro.",
+                        "Aviso",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+            }
+            catch (ApplicationException ex)
+            {
+                MessageBox.Show("No se pudo eliminar el registro" + ex.Message, 
+                    "Aviso", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error inesperado: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+
         }
     }
 }

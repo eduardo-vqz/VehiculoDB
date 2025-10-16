@@ -1,4 +1,5 @@
 using VehiculoDB.Core.Lib;
+using VehiculoDB.Formularios.FormsMantenimientos;
 using VehiculoDB.Formularios.FromsPropietario;
 
 namespace VehiculoDB
@@ -28,6 +29,12 @@ namespace VehiculoDB
         private void btnPropietarios_Click(object sender, EventArgs e)
         {
             frmPropietario form = new frmPropietario();
+            form.Show();
+        }
+
+        private void btnMantenimientos_Click(object sender, EventArgs e)
+        {
+            frmMantenimientos form = new frmMantenimientos();
             form.Show();
         }
     }

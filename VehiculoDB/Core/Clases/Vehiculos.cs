@@ -29,8 +29,8 @@ namespace VehiculoDB.Core.Clases
         public string Modelo { get => modelo; set => modelo = value; }
         public int Anio { get => anio; set => anio = value; }
         public string Color { get => color; set => color = value; }
-        internal Marcas Marcas { get => marcas; set => marcas = value; }
-        internal Propietario Propietario { get => propietario; set => propietario = value; }
-        internal TiposCarro TiposCarro { get => tiposCarro; set => tiposCarro = value; }
+        public Marcas Marcas { get => marcas; set => marcas = value; }
+        public Propietario Propietario { get => propietario; set => propietario = value; }
+        public TiposCarro TiposCarro { get => tiposCarro; set => tiposCarro = value; }
     }
 }

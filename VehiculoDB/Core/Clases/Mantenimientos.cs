@@ -10,7 +10,7 @@ namespace VehiculoDB.Core.Clases
     {
         private int idMantenimiento;
         private Vehiculos vehiculo;
-        private string fecha;
+        private DateTime fecha;
         private decimal costo;
         private string observaciones;
         private TiposMantenimiento tiposMantenimiento;
@@ -21,10 +21,18 @@ namespace VehiculoDB.Core.Clases
         }
 
         public int IdMantenimiento { get => idMantenimiento; set => idMantenimiento = value; }
-        public string Fecha { get => fecha; set => fecha = value; }
+        public DateTime Fecha { get => fecha; set => fecha = value; }
         public decimal Costo { get => costo; set => costo = value; }
         public string Observaciones { get => observaciones; set => observaciones = value; }
-        internal Vehiculos Vehiculo { get => vehiculo; set => vehiculo = value; }
-        internal TiposMantenimiento TiposMantenimiento { get => tiposMantenimiento; set => tiposMantenimiento = value; }
+        public Vehiculos Vehiculo { get => vehiculo; set => vehiculo = value; }
+        public TiposMantenimiento TiposMantenimiento { get => tiposMantenimiento; set => tiposMantenimiento = value; }
+
+        // Propiedades "planas" para binding seguro en DataGridView
+        public int IdVehiculo { get => vehiculo.IdVehiculo; set => vehiculo.IdVehiculo = value; }
+        public string Placa { get => vehiculo.Placa; set => vehiculo.Placa = value; }
+
+        public int IdTipoMantenimiento { get => tiposMantenimiento.IdTipoMantenimiento; set => tiposMantenimiento.IdTipoMantenimiento = value; }
+        public string NombreTipo { get => tiposMantenimiento.NombreTipo; set => tiposMantenimiento.NombreTipo = value; }
+
     }
 }

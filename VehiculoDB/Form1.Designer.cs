@@ -31,6 +31,7 @@
             btnOpen = new Button();
             btnClose = new Button();
             btnPropietarios = new Button();
+            btnMantenimientos = new Button();
             SuspendLayout();
             // 
             // btnOpen
@@ -63,11 +64,22 @@
             btnPropietarios.UseVisualStyleBackColor = true;
             btnPropietarios.Click += btnPropietarios_Click;
             // 
+            // btnMantenimientos
+            // 
+            btnMantenimientos.Location = new Point(61, 219);
+            btnMantenimientos.Name = "btnMantenimientos";
+            btnMantenimientos.Size = new Size(240, 60);
+            btnMantenimientos.TabIndex = 3;
+            btnMantenimientos.Text = "Mantenimientos";
+            btnMantenimientos.UseVisualStyleBackColor = true;
+            btnMantenimientos.Click += btnMantenimientos_Click;
+            // 
             // frmPrincipal
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnMantenimientos);
             Controls.Add(btnPropietarios);
             Controls.Add(btnClose);
             Controls.Add(btnOpen);
@@ -81,5 +93,6 @@
         private Button btnOpen;
         private Button btnClose;
         private Button btnPropietarios;
+        private Button btnMantenimientos;
     }
 }

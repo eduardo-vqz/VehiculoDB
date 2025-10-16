@@ -12,7 +12,7 @@ namespace VehiculoDB.Core.Dao
         int Insert(Mantenimientos paMantenimiento);
         bool Update(Mantenimientos paMantenimiento);
         bool Delete(int idMantenimiento);
-        Propietario GetById(int idMantenimiento);
-        List<Propietario> GetAll(string filtro = "");
+        Mantenimientos GetById(int idMantenimiento);
+        List<Mantenimientos> GetAll(string filtro = "");
     }
 }

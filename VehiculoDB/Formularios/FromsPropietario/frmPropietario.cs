@@ -108,10 +108,6 @@ namespace VehiculoDB.Formularios.FromsPropietario
                 MessageBox.Show("Seleccione un registro");
                 return;
             }
-            else
-            {
-                MessageBox.Show("Eliminar" + id.Value);
-            }
 
             var respuesta = MessageBox.Show(
                 "¿Desea eliminar el registro seleccionado?", 

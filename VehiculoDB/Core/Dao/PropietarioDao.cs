@@ -97,7 +97,7 @@ namespace VehiculoDB.Core.Dao
                 command = new SqlCommand(@"SELECT IdPropietario, Nombre, Apellido, DUI,
                                          Telefono, Direccion
                                          FROM Propietarios
-                                         WHERE IdPropietario = @id", Con);
+                                         WHERE IdPropietario = @Id", Con);
 
 
                 command.Parameters.Add("@Id", SqlDbType.Int).Value = idPropietario;

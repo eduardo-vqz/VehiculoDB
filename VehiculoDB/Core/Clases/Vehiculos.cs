@@ -17,7 +17,8 @@ namespace VehiculoDB.Core.Clases
         private Propietario propietario;
         private TiposCarro tiposCarro;
 
-        Vehiculos() { 
+
+        public Vehiculos() { 
             marcas = new Marcas();
             propietario = new Propietario();
             tiposCarro = new TiposCarro();

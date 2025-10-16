@@ -16,8 +16,8 @@ namespace VehiculoDB.Core.Clases
         private TiposMantenimiento tiposMantenimiento;
 
         public Mantenimientos() { 
-            Vehiculo = new Vehiculos();
-            TiposMantenimiento = new TiposMantenimiento();
+            vehiculo = new Vehiculos();
+            tiposMantenimiento = new TiposMantenimiento();
         }
 
         public int IdMantenimiento { get => idMantenimiento; set => idMantenimiento = value; }

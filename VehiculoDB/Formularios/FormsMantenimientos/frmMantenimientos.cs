@@ -16,5 +16,10 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
         {
             InitializeComponent();
         }
+
+        private void frmMantenimientos_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

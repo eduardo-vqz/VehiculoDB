@@ -70,3 +70,4 @@ C:\Users\hervas\Desktop\VehiculoDB\VehiculoDB\VehiculoDB\obj\Debug\net8.0-window
 C:\Users\hervas\Desktop\VehiculoDB\VehiculoDB\VehiculoDB\obj\Debug\net8.0-windows\VehiculoDB.Formularios.FromsPropietario.frmActualizarPropietario.resources
 C:\Users\hervas\Desktop\VehiculoDB\VehiculoDB\VehiculoDB\obj\Debug\net8.0-windows\VehiculoDB.Formularios.FromsPropietario.frmInsertarPropietario.resources
 C:\Users\hervas\Desktop\VehiculoDB\VehiculoDB\VehiculoDB\obj\Debug\net8.0-windows\VehiculoDB.Formularios.FormsMantenimientos.frmMantenimientos.resources
+C:\Users\hervas\Desktop\VehiculoDB\VehiculoDB\VehiculoDB\obj\Debug\net8.0-windows\VehiculoDB.Formularios.FormsMantenimientos.frmInsertarMantenimientos.resources

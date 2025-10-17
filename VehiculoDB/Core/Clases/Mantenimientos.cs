@@ -27,10 +27,9 @@ namespace VehiculoDB.Core.Clases
         public Vehiculos Vehiculo { get => vehiculo; set => vehiculo = value; }
         public TiposMantenimiento TiposMantenimiento { get => tiposMantenimiento; set => tiposMantenimiento = value; }
 
-        // Propiedades "planas" para binding seguro en DataGridView
+        //Uso de clases anidadas
         public int IdVehiculo { get => vehiculo.IdVehiculo; set => vehiculo.IdVehiculo = value; }
         public string Placa { get => vehiculo.Placa; set => vehiculo.Placa = value; }
-
         public int IdTipoMantenimiento { get => tiposMantenimiento.IdTipoMantenimiento; set => tiposMantenimiento.IdTipoMantenimiento = value; }
         public string NombreTipo { get => tiposMantenimiento.NombreTipo; set => tiposMantenimiento.NombreTipo = value; }
 

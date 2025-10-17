@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VehiculoDB.Core.Dao;
 
 namespace VehiculoDB.Core.Clases
 {
@@ -32,5 +33,14 @@ namespace VehiculoDB.Core.Clases
         public Marcas Marcas { get => marcas; set => marcas = value; }
         public Propietario Propietario { get => propietario; set => propietario = value; }
         public TiposCarro TiposCarro { get => tiposCarro; set => tiposCarro = value; }
+
+        public int IdMarca { get => marcas.IdMarca; set => Marcas.IdMarca = value; }
+        public string NombreMarca { get => marcas.NombreMarca; set => Marcas.NombreMarca = value; }
+        public int IdPropietario { get => propietario.IdPropietario; set => propietario.IdPropietario = value; }
+        public string DUI { get => propietario.DUI; set => propietario.DUI = value; }
+        public int IdTipoCarro { get => tiposCarro.IdTipoCarro; set => tiposCarro.IdTipoCarro = value; }
+        public string NombreTipo { get => tiposCarro.NombreTipo; set => tiposCarro.NombreTipo = value; }
+
+
     }
 }

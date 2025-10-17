@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Folder Include="Core\Enums\" />
+    <Folder Include="Formularios\FormsVehiculo\" />
   </ItemGroup>
 
   <ItemGroup>

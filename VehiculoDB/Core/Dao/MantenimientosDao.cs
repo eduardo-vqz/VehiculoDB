@@ -55,18 +55,7 @@ namespace VehiculoDB.Core.Dao
 
                 while (rd.Read())
                 {
-                    Mantenimientos mantenimientos = new Mantenimientos();
-
-                    mantenimientos.IdMantenimiento = rd.GetInt32(0);
-                    mantenimientos.Vehiculo.IdVehiculo = rd.GetInt32(1);
-                    mantenimientos.Vehiculo.Placa = rd.GetString(2);
-                    mantenimientos.Fecha = rd.GetDateTime(2);
-                    mantenimientos.Costo = rd.GetDecimal(4); 
-                    mantenimientos.Observaciones = rd.GetString(5);
-                    mantenimientos.TiposMantenimiento.IdTipoMantenimiento = rd.GetInt32(6);
-                    mantenimientos.TiposMantenimiento.NombreTipo = rd.GetString(7);
-
-                    lista.Add(mantenimientos);
+                    lista.Add(Map(rd));
                 }
 
             }
@@ -83,7 +72,20 @@ namespace VehiculoDB.Core.Dao
 
             return lista;
         }
-           
+
+        private static Mantenimientos Map(SqlDataReader rd) => new Mantenimientos
+        {
+            IdMantenimiento = rd.GetInt32(0),
+            IdVehiculo = rd.GetInt32(1),
+            Placa = rd.GetString(2),
+            Fecha = rd.GetDateTime(3),
+            Costo = rd.GetDecimal(4),
+            Observaciones = rd.GetString(5),
+            IdTipoMantenimiento = rd.GetInt32(6),
+            NombreTipo = rd.GetString(7)
+
+        };
+
         public int Insert(Mantenimientos paMantenimiento)
         {
             throw new NotImplementedException();

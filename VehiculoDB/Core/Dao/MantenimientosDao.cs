@@ -29,9 +29,9 @@ namespace VehiculoDB.Core.Dao
             {
                 Con = OpenDb();
                 string sql = @"
-                            SELECT Mantenimientos.IdMantenimiento, Vehiculos.IdVehiculo, Vehiculos.Placa, Mantenimientos.Fecha, 
-		                            Mantenimientos.Costo, Mantenimientos.Observaciones, TiposMantenimiento.IdTipoMantenimiento,
-		                            TiposMantenimiento.NombreTipo
+                            SELECT Mantenimientos.IdMantenimiento, Vehiculos.IdVehiculo, Vehiculos.Placa, 
+                                    Mantenimientos.Fecha, Mantenimientos.Costo, Mantenimientos.Observaciones, 
+                                    TiposMantenimiento.IdTipoMantenimiento, TiposMantenimiento.NombreTipo
                             FROM Mantenimientos 
                             inner join Vehiculos on Vehiculos.IdVehiculo = Mantenimientos.IdMantenimiento
                             inner join TiposMantenimiento on TiposMantenimiento.IdTipoMantenimiento = Mantenimientos.IdTipoMantenimiento

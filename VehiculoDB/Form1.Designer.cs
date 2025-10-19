@@ -66,7 +66,7 @@
             // 
             // btnMantenimientos
             // 
-            btnMantenimientos.Location = new Point(61, 219);
+            btnMantenimientos.Location = new Point(61, 157);
             btnMantenimientos.Name = "btnMantenimientos";
             btnMantenimientos.Size = new Size(240, 60);
             btnMantenimientos.TabIndex = 3;

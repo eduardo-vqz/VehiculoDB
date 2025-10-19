@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VehiculoDB.Formularios.FormsVehiculo;
+using VehiculoDB.Formularios.FromsPropietario;
 
 namespace VehiculoDB.Formularios.FormsMantenimientos
 {
@@ -16,6 +18,13 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
         {
             InitializeComponent();
         }
-        
+
+        private void btnAsociarVehiculo_Click(object sender, EventArgs e)
+        {
+            frmBuscarVehiculo frm = new frmBuscarVehiculo();
+            frm.ShowDialog();
+            //if (frm.ShowDialog() == DialogResult.OK) { }
+
+        }
     }
 }

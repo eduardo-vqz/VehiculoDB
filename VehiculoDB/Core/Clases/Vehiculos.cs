@@ -40,7 +40,5 @@ namespace VehiculoDB.Core.Clases
         public string DUI { get => propietario.DUI; set => propietario.DUI = value; }
         public int IdTipoCarro { get => tiposCarro.IdTipoCarro; set => tiposCarro.IdTipoCarro = value; }
         public string NombreTipo { get => tiposCarro.NombreTipo; set => tiposCarro.NombreTipo = value; }
-
-
     }
 }

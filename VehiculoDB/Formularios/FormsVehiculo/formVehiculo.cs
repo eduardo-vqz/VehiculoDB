@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace VehiculoDB.Formularios.FormsVehiculo
 {
-    public partial class fromVehiculo : Form
+    public partial class formVehiculo : Form
     {
-        public fromVehiculo()
+        public formVehiculo()
         {
             InitializeComponent();
+        }
+
+        private void formVehiculo_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

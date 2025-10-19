@@ -14,13 +14,29 @@ namespace VehiculoDB.Core.Dao
     {
         SqlConnection Con = null;
         SqlCommand command = null;
+        
+        private static Vehiculos Map(SqlDataReader rd) => new Vehiculos
+        {
+            IdVehiculo = rd.GetInt32(0),
+            Placa = rd.GetString(1),
+            Modelo = rd.GetString(2),
+            Anio = rd.GetInt32(3),
+            Color = rd.GetString(4),
+            IdMarca = rd.GetInt32(5),
+            NombreMarca = rd.GetString(6),
+            IdPropietario = rd.GetInt32(7),
+            DUI = rd.GetString(8),
+            IdTipoCarro = rd.GetInt32(9),
+            NombreTipo = rd.GetString(10),
 
-        bool IVehiculo.Delete(int idVehiculo)
+        };
+
+        public bool Delete(int idVehiculo)
         {
             throw new NotImplementedException();
         }
 
-        List<Vehiculos> IVehiculo.GetAll(string filtro)
+        public List<Vehiculos> GetAll(string filtro = "")
         {
             var lista = new List<Vehiculos>();
             SqlDataReader rd = null;
@@ -74,34 +90,17 @@ namespace VehiculoDB.Core.Dao
             return lista;
         }
 
-        private static Vehiculos Map(SqlDataReader rd) => new Vehiculos
-        {
-            IdVehiculo = rd.GetInt32(0),
-            Placa = rd.GetString(1),
-            Modelo = rd.GetString(2),
-            Anio = rd.GetInt32(3),
-            Color = rd.GetString(4),
-            IdMarca = rd.GetInt32(5),
-            NombreMarca = rd.GetString(6),
-            IdPropietario = rd.GetInt32(7),
-            DUI = rd.GetString(8),
-            IdTipoCarro = rd.GetInt32(9),
-            NombreTipo = rd.GetString(10),
-
-        };
-
-
-        Vehiculos IVehiculo.GetById(int idVehiculo)
+        public Vehiculos GetById(int idVehiculo)
         {
             throw new NotImplementedException();
         }
 
-        int IVehiculo.Insert(Vehiculos paVehiculo)
+        public int Insert(Vehiculos paVehiculo)
         {
             throw new NotImplementedException();
         }
 
-        bool IVehiculo.Update(Vehiculos paVehiculo)
+        public bool Update(Vehiculos paVehiculo)
         {
             throw new NotImplementedException();
         }

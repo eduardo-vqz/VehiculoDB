@@ -53,6 +53,7 @@
             btnAgregar.TabIndex = 8;
             btnAgregar.Text = "Agregar";
             btnAgregar.UseVisualStyleBackColor = true;
+            btnAgregar.Click += btnAgregar_Click;
             // 
             // btnEdiarPropietario
             // 

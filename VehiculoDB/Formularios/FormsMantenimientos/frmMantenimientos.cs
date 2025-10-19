@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using VehiculoDB.Core.Clases;
 using VehiculoDB.Core.Dao;
+using VehiculoDB.Formularios.FormsVehiculo;
+using VehiculoDB.Formularios.FromsPropietario;
 
 namespace VehiculoDB.Formularios.FormsMantenimientos
 {
     public partial class frmMantenimientos : Form
     {
-        MantenimientosDao mantenimientosDao = new MantenimientosDao(); 
+        MantenimientosDao mantenimientosDao = new MantenimientosDao();
         public frmMantenimientos()
         {
             InitializeComponent();
@@ -43,19 +45,19 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
                 Width = 110
             });
 
-            
+
             dgvMantenimientos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "IdVehiculoCol",
                 HeaderText = "IdVehiculo",
-                DataPropertyName = "IdVehiculo", 
+                DataPropertyName = "IdVehiculo",
                 Width = 90
             });
             dgvMantenimientos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "PlacaCol",
                 HeaderText = "Placa",
-                DataPropertyName = "Placa", 
+                DataPropertyName = "Placa",
                 Width = 90
             });
             dgvMantenimientos.Columns.Add(new DataGridViewTextBoxColumn
@@ -113,6 +115,13 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
                 MessageBox.Show("Error inesperado:" + ex);
             }
         }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            frmInsertarMantenimientos frm = new frmInsertarMantenimientos();
+            if (frm.ShowDialog() == DialogResult.OK)
+                Cargar();
+        }
     }
-    
+
 }

@@ -59,6 +59,7 @@
             txtBuscarVehiculo.Name = "txtBuscarVehiculo";
             txtBuscarVehiculo.Size = new Size(508, 39);
             txtBuscarVehiculo.TabIndex = 14;
+            txtBuscarVehiculo.KeyUp += txtBuscarVehiculo_KeyUp;
             // 
             // frmBuscarVehiculo
             // 

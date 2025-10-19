@@ -43,7 +43,7 @@
             // 
             btnAsociarVehiculo.Location = new Point(475, 200);
             btnAsociarVehiculo.Name = "btnAsociarVehiculo";
-            btnAsociarVehiculo.Size = new Size(150, 46);
+            btnAsociarVehiculo.Size = new Size(268, 46);
             btnAsociarVehiculo.TabIndex = 1;
             btnAsociarVehiculo.Text = "Asociar Vehiculo";
             btnAsociarVehiculo.UseVisualStyleBackColor = true;

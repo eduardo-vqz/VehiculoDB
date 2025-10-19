@@ -45,77 +45,20 @@ namespace VehiculoDB.Formularios.FormsVehiculo
             dgvVehiculos.ReadOnly = true;
             dgvVehiculos.Columns.Clear();
 
-            configureCols(dgvVehiculos, "IdVechiculoCol", "Id Vehiculo", "IdVehiculo");
-            dgvVehiculos.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "IdMantenimientoCol",
-                HeaderText = "IdMantenimiento",
-                DataPropertyName = "IdMantenimiento",
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-            });
-
-
-            dgvVehiculos.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "IdVehiculoCol",
-                HeaderText = "IdVehiculo",
-                DataPropertyName = "IdVehiculo",
-                Width = 90
-            });
-            dgvVehiculos.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "PlacaCol",
-                HeaderText = "Placa",
-                DataPropertyName = "Placa",
-                Width = 90
-            });
-            dgvVehiculos.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "FechaCol",
-                HeaderText = "Fecha",
-                DataPropertyName = "Fecha",
-                Width = 110,
-                DefaultCellStyle = new DataGridViewCellStyle { Format = "yyyy-MM-dd" }
-            });
-
-            dgvVehiculos.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "CostoCol",
-                HeaderText = "Costo",
-                DataPropertyName = "Costo",
-                Width = 90,
-                DefaultCellStyle = new DataGridViewCellStyle { Format = "N2", Alignment = DataGridViewContentAlignment.MiddleRight }
-            });
-
-            dgvVehiculos.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "ObservacionesCol",
-                HeaderText = "Observaciones",
-                DataPropertyName = "Observaciones",
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-            });
-
-            dgvVehiculos.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "IdTipoMantenimientoCol",
-                HeaderText = "IdTipoMantenimiento",
-                DataPropertyName = "IdTipoMantenimiento", // cambiado: propiedad plana en Mantenimientos
-                Width = 130
-            });
-            dgvVehiculos.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "NombreTipoCol",
-                HeaderText = "Tipo Mantenimiento",
-                DataPropertyName = "NombreTipo", // cambiado: propiedad plana en Mantenimientos
-                Width = 130
-            });
+            configureCols(dgvVehiculos, "PlacaCol", "Placa", "Placa");
+            configureCols(dgvVehiculos, "ModeloCol", "Modelo", "Modelo");
+            configureCols(dgvVehiculos, "AnioCol", "Año", "Anio");
+            configureCols(dgvVehiculos, "ColorCol", "Color", "Color");
+            configureCols(dgvVehiculos, "NombreMarcaCol", "Marca", "NombreMarca");
+            configureCols(dgvVehiculos, "DUICol", "DUI", "DUI");
+            configureCols(dgvVehiculos, "Nombre", "Tipo", "NombreTipo");
         }
 
         private void Cargar(string filtro = "")
         {
             try
-            { 
-                dgvVehiculos.DataSource = vehiculoDao.GetAll();
+            {
+                dgvVehiculos.DataSource = vehiculoDao.GetAll(filtro);
                 dgvVehiculos.ClearSelection();
                 dgvVehiculos.CurrentCell = null;
             }
@@ -123,6 +66,13 @@ namespace VehiculoDB.Formularios.FormsVehiculo
             {
                 MessageBox.Show("Error inesperado:" + ex);
             }
+        }
+
+        
+
+        private void txtBuscarVehiculo_KeyUp(object sender, KeyEventArgs e)
+        {
+            Cargar(txtBuscarVehiculo.Text);
         }
     }
 }

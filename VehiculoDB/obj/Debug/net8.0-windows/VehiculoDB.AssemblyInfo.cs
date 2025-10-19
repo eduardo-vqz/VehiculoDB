@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VehiculoDB")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ca2ee9631e5d0e5b6b41444cd654818f3e4271ba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7338c67fcfb933a2bfeeaa4e92718aedf369f4d1")]
 [assembly: System.Reflection.AssemblyProductAttribute("VehiculoDB")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VehiculoDB")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

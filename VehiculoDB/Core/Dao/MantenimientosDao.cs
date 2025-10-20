@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -88,7 +89,31 @@ namespace VehiculoDB.Core.Dao
 
         public int Insert(Mantenimientos paMantenimiento)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Con = OpenDb();
+
+                command = new SqlCommand(@"INSERT INTO Propietarios (IdVehiculo, Fecha, Costo, Observaciones, IdTipoMantenimiento)
+                            OUTPUT INSERTED.IdMantenimiento 
+                            VALUES (@IdVehiculo, @Fecha, @Costo, @Observaciones, @IdTipoMantenimiento);", Con);
+                command.Parameters.Add("@IdVehiculo", SqlDbType.Int).Value = paMantenimiento.IdVehiculo;
+                command.Parameters.Add("@Fecha", SqlDbType.DateTime).Value = paMantenimiento.Fecha;
+                command.Parameters.Add("@Costo", SqlDbType.Decimal).Value = paMantenimiento.Costo;
+                command.Parameters.Add("@Observaciones", SqlDbType.NVarChar, 200).Value = (object?)paMantenimiento.Observaciones ?? DBNull.Value;
+                command.Parameters.Add("@IdTipoMantenimiento", SqlDbType.Int).Value = paMantenimiento.IdTipoMantenimiento;
+
+                var id = command.ExecuteScalar();
+                return Convert.ToInt32(id);
+            }
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Ha ocurrido un error inesperado. " + ex);
+            }
+            finally
+            {
+                command?.Dispose();
+                CloseDb();
+            }
         }
 
         public bool Update(Mantenimientos paMantenimiento)

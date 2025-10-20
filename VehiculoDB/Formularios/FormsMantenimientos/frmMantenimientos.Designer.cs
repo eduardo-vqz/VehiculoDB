@@ -82,6 +82,7 @@
             dgvMantenimientos.RowHeadersWidth = 82;
             dgvMantenimientos.Size = new Size(1363, 702);
             dgvMantenimientos.TabIndex = 5;
+            dgvMantenimientos.CellContentClick += dgvMantenimientos_CellContentClick;
             // 
             // frmMantenimientos
             // 

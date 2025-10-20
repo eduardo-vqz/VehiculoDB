@@ -34,6 +34,8 @@ namespace VehiculoDB.Core.Clases
         public Propietario Propietario { get => propietario; set => propietario = value; }
         public TiposCarro TiposCarro { get => tiposCarro; set => tiposCarro = value; }
 
+
+        //Atributos de clases anidadas
         public int IdMarca { get => marcas.IdMarca; set => Marcas.IdMarca = value; }
         public string NombreMarca { get => marcas.NombreMarca; set => Marcas.NombreMarca = value; }
         public int IdPropietario { get => propietario.IdPropietario; set => propietario.IdPropietario = value; }

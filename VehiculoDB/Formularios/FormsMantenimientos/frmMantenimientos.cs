@@ -28,6 +28,16 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
             Cargar();
         }
 
+        private void configureCols(DataGridView dataGridView, string name, string headerText, string dataPropertyName)
+        {
+            dataGridView.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = name,
+                HeaderText = headerText,
+                DataPropertyName = dataPropertyName,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+            });
+        }
         private void ConfiguracionGrid()
         {
             dgvMantenimientos.AutoGenerateColumns = false;
@@ -35,9 +45,15 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
             dgvMantenimientos.MultiSelect = false;
             dgvMantenimientos.AllowUserToAddRows = false;
             dgvMantenimientos.ReadOnly = true;
+            dgvMantenimientos.ScrollBars = ScrollBars.Vertical;
             dgvMantenimientos.Columns.Clear();
 
-            dgvMantenimientos.Columns.Add(new DataGridViewTextBoxColumn
+            configureCols(dgvMantenimientos, "PlacaCol", "Placa", "Placa");
+            configureCols(dgvMantenimientos, "FechaCol", "Fecha", "Fecha");
+            configureCols(dgvMantenimientos, "CostoCol", "Costo", "Costo");
+            configureCols(dgvMantenimientos, "ObservacionesCol", "Observaciones", "Observaciones");
+            configureCols(dgvMantenimientos, "NombreTipoCol", "NombreTipo", "NombreTipo");
+            /*dgvMantenimientos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "IdMantenimientoCol",
                 HeaderText = "IdMantenimiento",
@@ -53,6 +69,7 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
                 DataPropertyName = "IdVehiculo",
                 Width = 90
             });
+            
             dgvMantenimientos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "PlacaCol",
@@ -66,7 +83,7 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
                 HeaderText = "Fecha",
                 DataPropertyName = "Fecha",
                 Width = 110,
-                DefaultCellStyle = new DataGridViewCellStyle { Format = "yyyy-MM-dd" }
+                //DefaultCellStyle = new DataGridViewCellStyle { Format = "yyyy-MM-dd" }
             });
 
             dgvMantenimientos.Columns.Add(new DataGridViewTextBoxColumn
@@ -75,7 +92,7 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
                 HeaderText = "Costo",
                 DataPropertyName = "Costo",
                 Width = 90,
-                DefaultCellStyle = new DataGridViewCellStyle { Format = "N2", Alignment = DataGridViewContentAlignment.MiddleRight }
+                //DefaultCellStyle = new DataGridViewCellStyle { Format = "N2", Alignment = DataGridViewContentAlignment.MiddleRight }
             });
 
             dgvMantenimientos.Columns.Add(new DataGridViewTextBoxColumn
@@ -85,21 +102,21 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
                 DataPropertyName = "Observaciones",
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             });
-
+            /*
             dgvMantenimientos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "IdTipoMantenimientoCol",
                 HeaderText = "IdTipoMantenimiento",
                 DataPropertyName = "IdTipoMantenimiento", // cambiado: propiedad plana en Mantenimientos
                 Width = 130
-            });
+            }); 
             dgvMantenimientos.Columns.Add(new DataGridViewTextBoxColumn
             {
                 Name = "NombreTipoCol",
                 HeaderText = "Tipo Mantenimiento",
                 DataPropertyName = "NombreTipo", // cambiado: propiedad plana en Mantenimientos
                 Width = 130
-            });
+            });*/
         }
 
         private void Cargar(string filtro = "")
@@ -121,6 +138,11 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
             frmInsertarMantenimientos frm = new frmInsertarMantenimientos();
             if (frm.ShowDialog() == DialogResult.OK)
                 Cargar();
+        }
+
+        private void dgvMantenimientos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 

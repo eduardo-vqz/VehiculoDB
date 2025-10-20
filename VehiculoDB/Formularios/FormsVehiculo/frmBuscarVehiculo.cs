@@ -7,13 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VehiculoDB.Core.Clases;
 using VehiculoDB.Core.Dao;
+using VehiculoDB.Formularios.FromsPropietario;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace VehiculoDB.Formularios.FormsVehiculo
 {
     public partial class frmBuscarVehiculo : Form
     {
         VehiculoDao vehiculoDao = new VehiculoDao();
+        internal Vehiculos? vehiculoSeleccionado;
+
         public frmBuscarVehiculo()
         {
             InitializeComponent();
@@ -32,7 +37,7 @@ namespace VehiculoDB.Formularios.FormsVehiculo
                 Name = name,
                 HeaderText = headerText,
                 DataPropertyName = dataPropertyName,
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             });
         }
 
@@ -68,11 +73,43 @@ namespace VehiculoDB.Formularios.FormsVehiculo
             }
         }
 
+        private Vehiculos GetVehiculo()
+        {
+            if (dgvVehiculos.CurrentRow == null)
+            {
+                MessageBox.Show("Debe seleccionar un registo", "Aviso",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
+            }
+
+            if (dgvVehiculos.CurrentRow.DataBoundItem is Vehiculos paVehiculo)
+                return paVehiculo;
+
+            return null;
+        }
+
         
 
         private void txtBuscarVehiculo_KeyUp(object sender, KeyEventArgs e)
         {
             Cargar(txtBuscarVehiculo.Text);
+        }
+
+        private void btnSeleccionar_Click(object sender, EventArgs e)
+        {
+
+            if (GetVehiculo() == null)
+            {
+                MessageBox.Show("Seleccione una fila");
+                return;
+            }
+            else
+            {
+                
+                DialogResult = DialogResult.OK;
+                vehiculoSeleccionado = GetVehiculo();
+            }
+
         }
     }
 }

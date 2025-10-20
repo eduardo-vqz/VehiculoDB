@@ -42,6 +42,7 @@
             btnSeleccionar.TabIndex = 13;
             btnSeleccionar.Text = "Seleccionar";
             btnSeleccionar.UseVisualStyleBackColor = true;
+            btnSeleccionar.Click += btnSeleccionar_Click;
             // 
             // dgvVehiculos
             // 

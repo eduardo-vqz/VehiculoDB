@@ -63,6 +63,7 @@
             // 
             // txtPlaca
             // 
+            txtPlaca.Enabled = false;
             txtPlaca.Location = new Point(327, 26);
             txtPlaca.Name = "txtPlaca";
             txtPlaca.Size = new Size(200, 39);
@@ -152,6 +153,7 @@
             btnAgregar.TabIndex = 11;
             btnAgregar.Text = "Agregar";
             btnAgregar.UseVisualStyleBackColor = true;
+            btnAgregar.Click += btnAgregar_Click;
             // 
             // frmInsertarMantenimientos
             // 
@@ -173,6 +175,7 @@
             Controls.Add(dateTimePicker1);
             Name = "frmInsertarMantenimientos";
             Text = "frmInsertarMantenimientos";
+            Load += frmInsertarMantenimientos_Load;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -41,7 +41,7 @@ namespace VehiculoDB.Core.Dao
 
                 if (!string.IsNullOrWhiteSpace(filtro))
                 {
-                    sql = sql.Replace("/**where**/", "WHERE IdMantenimiento LIKE @f ");
+                    sql = sql.Replace("/**where**/", "WHERE Vehiculos.Placa LIKE @f ");
                 }
                 else
                 {

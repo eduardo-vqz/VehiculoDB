@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dateTimePicker1 = new DateTimePicker();
+            dtpFechaMantenimiento = new DateTimePicker();
             btnAsociarVehiculo = new Button();
             txtPlaca = new TextBox();
             txtCosto = new TextBox();
@@ -43,13 +43,13 @@
             btnAgregar = new Button();
             SuspendLayout();
             // 
-            // dateTimePicker1
+            // dtpFechaMantenimiento
             // 
-            dateTimePicker1.Location = new Point(327, 83);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(522, 39);
-            dateTimePicker1.TabIndex = 0;
-            dateTimePicker1.Value = new DateTime(2025, 10, 18, 22, 13, 16, 0);
+            dtpFechaMantenimiento.Location = new Point(327, 83);
+            dtpFechaMantenimiento.Name = "dtpFechaMantenimiento";
+            dtpFechaMantenimiento.Size = new Size(522, 39);
+            dtpFechaMantenimiento.TabIndex = 0;
+            dtpFechaMantenimiento.Value = new DateTime(2025, 10, 18, 0, 0, 0, 0);
             // 
             // btnAsociarVehiculo
             // 
@@ -172,7 +172,7 @@
             Controls.Add(txtCosto);
             Controls.Add(txtPlaca);
             Controls.Add(btnAsociarVehiculo);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(dtpFechaMantenimiento);
             Name = "frmInsertarMantenimientos";
             Text = "frmInsertarMantenimientos";
             Load += frmInsertarMantenimientos_Load;
@@ -182,7 +182,7 @@
 
         #endregion
 
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dtpFechaMantenimiento;
         private Button btnAsociarVehiculo;
         private TextBox txtPlaca;
         private TextBox txtCosto;

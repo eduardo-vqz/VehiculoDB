@@ -34,7 +34,7 @@ namespace VehiculoDB.Core.Dao
                                     Mantenimientos.Fecha, Mantenimientos.Costo, Mantenimientos.Observaciones, 
                                     TiposMantenimiento.IdTipoMantenimiento, TiposMantenimiento.NombreTipo
                             FROM Mantenimientos 
-                            inner join Vehiculos on Vehiculos.IdVehiculo = Mantenimientos.IdMantenimiento
+                            inner join Vehiculos on Vehiculos.IdVehiculo = Mantenimientos.IdVehiculo
                             inner join TiposMantenimiento on TiposMantenimiento.IdTipoMantenimiento = Mantenimientos.IdTipoMantenimiento
                             /**where**/
                             ORDER BY IdMantenimiento DESC;";
@@ -92,12 +92,13 @@ namespace VehiculoDB.Core.Dao
             try
             {
                 Con = OpenDb();
-
-                command = new SqlCommand(@"INSERT INTO Propietarios (IdVehiculo, Fecha, Costo, Observaciones, IdTipoMantenimiento)
+                MessageBox.Show($"{paMantenimiento.IdVehiculo}\n {paMantenimiento.Fecha.Date}\n {paMantenimiento.Costo}\n {paMantenimiento.Observaciones}\n {paMantenimiento.IdTipoMantenimiento}");
+                command = new SqlCommand(@"
+                            INSERT INTO Mantenimientos (IdVehiculo, Fecha, Costo, Observaciones, IdTipoMantenimiento)
                             OUTPUT INSERTED.IdMantenimiento 
                             VALUES (@IdVehiculo, @Fecha, @Costo, @Observaciones, @IdTipoMantenimiento);", Con);
                 command.Parameters.Add("@IdVehiculo", SqlDbType.Int).Value = paMantenimiento.IdVehiculo;
-                command.Parameters.Add("@Fecha", SqlDbType.DateTime).Value = paMantenimiento.Fecha;
+                command.Parameters.Add("@Fecha", SqlDbType.Date).Value = paMantenimiento.Fecha.Date;
                 command.Parameters.Add("@Costo", SqlDbType.Decimal).Value = paMantenimiento.Costo;
                 command.Parameters.Add("@Observaciones", SqlDbType.NVarChar, 200).Value = (object?)paMantenimiento.Observaciones ?? DBNull.Value;
                 command.Parameters.Add("@IdTipoMantenimiento", SqlDbType.Int).Value = paMantenimiento.IdTipoMantenimiento;

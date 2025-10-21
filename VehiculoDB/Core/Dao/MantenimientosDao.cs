@@ -169,7 +169,7 @@ namespace VehiculoDB.Core.Dao
             }
         }
 
-        Mantenimientos IMantenimientos.GetById(int idMantenimiento)
+        public Mantenimientos GetById(int idMantenimiento)
         {
             SqlDataReader rd = null;
             try

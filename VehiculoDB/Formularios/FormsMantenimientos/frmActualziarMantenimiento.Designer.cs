@@ -40,7 +40,7 @@
             txtCosto = new TextBox();
             txtPlaca = new TextBox();
             btnAsociarVehiculo = new Button();
-            dateTimePicker1 = new DateTimePicker();
+            dtpFechaMantenimiento = new DateTimePicker();
             SuspendLayout();
             // 
             // btnCerrar
@@ -60,6 +60,7 @@
             btnActualizar.TabIndex = 24;
             btnActualizar.Text = "Actualizar";
             btnActualizar.UseVisualStyleBackColor = true;
+            btnActualizar.Click += btnActualizar_Click;
             // 
             // label5
             // 
@@ -144,13 +145,13 @@
             btnAsociarVehiculo.Text = "Asociar Vehiculo";
             btnAsociarVehiculo.UseVisualStyleBackColor = true;
             // 
-            // dateTimePicker1
+            // dtpFechaMantenimiento
             // 
-            dateTimePicker1.Location = new Point(324, 90);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(522, 39);
-            dateTimePicker1.TabIndex = 13;
-            dateTimePicker1.Value = new DateTime(2025, 10, 18, 22, 13, 16, 0);
+            dtpFechaMantenimiento.Location = new Point(324, 90);
+            dtpFechaMantenimiento.Name = "dtpFechaMantenimiento";
+            dtpFechaMantenimiento.Size = new Size(522, 39);
+            dtpFechaMantenimiento.TabIndex = 13;
+            dtpFechaMantenimiento.Value = new DateTime(2025, 10, 18, 22, 13, 16, 0);
             // 
             // frmActualziarMantenimiento
             // 
@@ -169,7 +170,7 @@
             Controls.Add(txtCosto);
             Controls.Add(txtPlaca);
             Controls.Add(btnAsociarVehiculo);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(dtpFechaMantenimiento);
             Name = "frmActualziarMantenimiento";
             Text = "frmActualziarMantenimiento";
             Load += frmActualziarMantenimiento_Load;
@@ -191,6 +192,6 @@
         private TextBox txtCosto;
         private TextBox txtPlaca;
         private Button btnAsociarVehiculo;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dtpFechaMantenimiento;
     }
 }

@@ -140,7 +140,34 @@ namespace VehiculoDB.Core.Dao
 
         Mantenimientos IMantenimientos.GetById(int idMantenimiento)
         {
-            throw new NotImplementedException();
+            SqlDataReader rd = null;
+            try
+            {
+                Con = OpenDb();
+
+                command = new SqlCommand(@"
+                            SELECT Mantenimientos.IdMantenimiento, Vehiculos.IdVehiculo, Vehiculos.Placa, 
+                                    Mantenimientos.Fecha, Mantenimientos.Costo, Mantenimientos.Observaciones, 
+                                    TiposMantenimiento.IdTipoMantenimiento, TiposMantenimiento.NombreTipo
+                            FROM Mantenimientos 
+                            inner join Vehiculos on Vehiculos.IdVehiculo = Mantenimientos.IdVehiculo
+                            inner join TiposMantenimiento on TiposMantenimiento.IdTipoMantenimiento = Mantenimientos.IdTipoMantenimiento
+                            WHERE Mantenimientos.IdMantenimiento = @Id", Con);
+
+
+                command.Parameters.Add("@Id", SqlDbType.Int).Value = idMantenimiento;
+                rd = command.ExecuteReader(CommandBehavior.SingleRow);
+                if (!rd.Read())
+                    return null;
+
+                return Map(rd);
+            }
+            finally
+            {
+                rd?.Close();
+                command?.Dispose();
+                CloseDb();
+            }
         }
     }
 }

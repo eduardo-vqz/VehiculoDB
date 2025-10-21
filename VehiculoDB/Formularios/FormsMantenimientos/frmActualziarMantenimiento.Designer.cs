@@ -172,6 +172,7 @@
             Controls.Add(dateTimePicker1);
             Name = "frmActualziarMantenimiento";
             Text = "frmActualziarMantenimiento";
+            Load += frmActualziarMantenimiento_Load;
             ResumeLayout(false);
             PerformLayout();
         }

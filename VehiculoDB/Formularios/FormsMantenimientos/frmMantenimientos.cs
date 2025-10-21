@@ -153,8 +153,8 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
                 return null;
             }
 
-            if (dgvMantenimientos.CurrentRow.DataBoundItem is Propietario paPropietario)
-                return paPropietario.IdPropietario;
+            if (dgvMantenimientos.CurrentRow.DataBoundItem is Mantenimientos paMantenimientos)
+                return paMantenimientos.IdMantenimiento;
 
             return null;
         }

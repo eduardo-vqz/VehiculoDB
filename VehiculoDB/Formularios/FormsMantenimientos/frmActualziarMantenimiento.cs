@@ -93,9 +93,12 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
             catch (Exception ex)
             {
                 MessageBox.Show("Error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
             }
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

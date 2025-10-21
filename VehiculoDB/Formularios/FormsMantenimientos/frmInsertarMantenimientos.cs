@@ -93,9 +93,9 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
         private void CargarTiposMantenimiento(int? idSeleccionado = null)
         {
             TiposMantenimientoDao tiposMantenimientoDao = new TiposMantenimientoDao();
-            var tipos = tiposMantenimientoDao.GetAll(); // List<TiposMantenimiento>
+            var tipos = tiposMantenimientoDao.GetAll(); 
 
-            // (Opcional) agrega item "-- Seleccione --"
+
             tipos.Insert(0, new TiposMantenimiento
             {
                 IdTipoMantenimiento = 0,

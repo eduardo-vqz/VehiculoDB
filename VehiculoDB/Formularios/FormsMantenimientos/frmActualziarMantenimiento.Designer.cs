@@ -51,6 +51,7 @@
             btnCerrar.TabIndex = 25;
             btnCerrar.Text = "Cerrar";
             btnCerrar.UseVisualStyleBackColor = true;
+            btnCerrar.Click += btnCerrar_Click;
             // 
             // btnActualizar
             // 

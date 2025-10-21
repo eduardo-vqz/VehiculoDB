@@ -63,6 +63,7 @@
             btnEdiarPropietario.TabIndex = 7;
             btnEdiarPropietario.Text = "Editar";
             btnEdiarPropietario.UseVisualStyleBackColor = true;
+            btnEdiarPropietario.Click += btnEdiarPropietario_Click;
             // 
             // bntCerrar
             // 

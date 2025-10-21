@@ -144,6 +144,38 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
         {
 
         }
+        private int? GetIdSeleccionado()
+        {
+            if (dgvMantenimientos.CurrentRow == null)
+            {
+                MessageBox.Show("Debe seleccionar un registo", "Aviso",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
+            }
+
+            if (dgvMantenimientos.CurrentRow.DataBoundItem is Propietario paPropietario)
+                return paPropietario.IdPropietario;
+
+            return null;
+        }
+        private void btnEdiarPropietario_Click(object sender, EventArgs e)
+        {
+            var id = GetIdSeleccionado();
+            if (!id.HasValue)
+            {
+                MessageBox.Show("Seleccione una fila");
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Editar" + id.Value);
+            }
+
+            frmActualziarMantenimiento frm = new frmActualziarMantenimiento(id.Value);
+
+            if (frm.ShowDialog() == DialogResult.OK)
+                Cargar();
+        }
     }
 
 }

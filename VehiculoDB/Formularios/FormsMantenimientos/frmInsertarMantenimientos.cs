@@ -18,7 +18,7 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
     {
         int id_vehiculo;
 
-        
+
         public frmInsertarMantenimientos()
         {
             InitializeComponent();
@@ -53,24 +53,24 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
             {
                 var id = mantenimientosDao.Insert(mantenimiento);
 
-                
-                    if (id > 0)
-                    {
-                        MessageBox.Show("El mantenimiento se registro con éxito" + id,
-                            "Éxito", MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
 
-                        DialogResult = DialogResult.OK;
+                if (id > 0)
+                {
+                    MessageBox.Show("El mantenimiento se registro con éxito" + id,
+                        "Éxito", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
 
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Mantenimiento registrado sin éxito",
-                            "Error", MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                    }
-                
+                    DialogResult = DialogResult.OK;
+
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Mantenimiento registrado sin éxito",
+                        "Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+
             }
             catch (ApplicationException ex)
             {
@@ -107,5 +107,10 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
             cbxTipoMantenimiento.ValueMember = "IdTipoMantenimiento";
 
         }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
+    }
 }

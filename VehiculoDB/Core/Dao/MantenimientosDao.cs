@@ -18,7 +18,23 @@ namespace VehiculoDB.Core.Dao
 
         public bool Delete(int idMantenimiento)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Con = OpenDb();
+                command = new SqlCommand(@"DELETE FROM Mantenimientos WHERE IdMantenimiento = @Id;", Con);
+                command.Parameters.Add("@Id", SqlDbType.Int).Value = idMantenimiento;
+
+                return command.ExecuteNonQuery() == 1;
+            }
+            catch (SqlException ex) 
+            {
+                throw new ApplicationException("No se puede eliminar: " + ex);
+            }
+            finally
+            {
+                command?.Dispose();
+                CloseDb();
+            }
         }
 
         public List<Mantenimientos> GetAll(string filtro = "")

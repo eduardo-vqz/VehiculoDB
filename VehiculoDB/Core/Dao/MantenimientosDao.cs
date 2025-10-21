@@ -135,7 +135,38 @@ namespace VehiculoDB.Core.Dao
 
         public bool Update(Mantenimientos paMantenimiento)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Con = OpenDb();
+
+                command = new SqlCommand(@"UPDATE Mantenimientos
+                        SET IdVehiculo = @IdVehiculo,
+                            Fecha = @Fecha,
+                            Costo = @Costo,
+                            Observaciones = @Observaciones,
+                            IdTipoMantenimiento = @IdTipoMantenimiento
+                        WHERE IdMantenimiento = @id;", Con);
+
+                command.Parameters.Add("@IdVehiculo", SqlDbType.Int).Value = paMantenimiento.IdVehiculo;
+                command.Parameters.Add("@Fecha", SqlDbType.Date).Value = paMantenimiento.Fecha.Date;
+                command.Parameters.Add("@Costo", SqlDbType.Decimal).Value = paMantenimiento.Costo;
+                command.Parameters.Add("@Observaciones", SqlDbType.NVarChar, 200).Value = (object?)paMantenimiento.Observaciones ?? DBNull.Value;
+                command.Parameters.Add("@IdTipoMantenimiento", SqlDbType.Int).Value = paMantenimiento.IdTipoMantenimiento;
+                command.Parameters.Add("@Id", SqlDbType.Int).Value = paMantenimiento.IdMantenimiento;
+                return command.ExecuteNonQuery() == 1;
+
+            }
+
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Error inesperado: " + ex);
+
+            }
+            finally
+            {
+                command?.Dispose();
+                CloseDb();
+            }
         }
 
         Mantenimientos IMantenimientos.GetById(int idMantenimiento)

@@ -36,9 +36,9 @@
             // 
             // btnOpen
             // 
-            btnOpen.Location = new Point(549, 112);
+            btnOpen.Location = new Point(556, 46);
             btnOpen.Name = "btnOpen";
-            btnOpen.Size = new Size(150, 46);
+            btnOpen.Size = new Size(184, 60);
             btnOpen.TabIndex = 0;
             btnOpen.Text = "Abrir";
             btnOpen.UseVisualStyleBackColor = true;
@@ -46,9 +46,9 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(549, 203);
+            btnClose.Location = new Point(556, 131);
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(150, 46);
+            btnClose.Size = new Size(184, 60);
             btnClose.TabIndex = 1;
             btnClose.Text = "Cerrar";
             btnClose.UseVisualStyleBackColor = true;
@@ -56,9 +56,9 @@
             // 
             // btnPropietarios
             // 
-            btnPropietarios.Location = new Point(61, 72);
+            btnPropietarios.Location = new Point(68, 46);
             btnPropietarios.Name = "btnPropietarios";
-            btnPropietarios.Size = new Size(173, 60);
+            btnPropietarios.Size = new Size(240, 60);
             btnPropietarios.TabIndex = 2;
             btnPropietarios.Text = "Propietarios";
             btnPropietarios.UseVisualStyleBackColor = true;
@@ -66,7 +66,7 @@
             // 
             // btnMantenimientos
             // 
-            btnMantenimientos.Location = new Point(61, 157);
+            btnMantenimientos.Location = new Point(68, 131);
             btnMantenimientos.Name = "btnMantenimientos";
             btnMantenimientos.Size = new Size(240, 60);
             btnMantenimientos.TabIndex = 3;

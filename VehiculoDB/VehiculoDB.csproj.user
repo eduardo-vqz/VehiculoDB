@@ -16,7 +16,13 @@
     <Compile Update="Formularios\FormsVehiculo\formVehiculo.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formularios\FormsVehiculo\frmActualizarVehiculo.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Formularios\FormsVehiculo\frmBuscarVehiculo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Formularios\FormsVehiculo\frmInsertarVehiculo.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formularios\FromsPropietario\frmActualizarPropietario.cs">

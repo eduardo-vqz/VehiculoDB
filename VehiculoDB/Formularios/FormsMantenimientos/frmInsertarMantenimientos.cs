@@ -1,23 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using VehiculoDB.Core.Clases;
 using VehiculoDB.Core.Dao;
 using VehiculoDB.Formularios.FormsVehiculo;
-using VehiculoDB.Formularios.FromsPropietario;
 
 namespace VehiculoDB.Formularios.FormsMantenimientos
 {
     public partial class frmInsertarMantenimientos : Form
     {
-        int id_vehiculo;
-
+        private int idVehiculo;
 
         public frmInsertarMantenimientos()
         {
@@ -30,47 +19,44 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
             if (frm.ShowDialog() == DialogResult.OK && frm.vehiculoSeleccionado != null)
             {
                 txtPlaca.Text = frm.vehiculoSeleccionado.Placa;
-                id_vehiculo = frm.vehiculoSeleccionado.IdVehiculo;
+                idVehiculo = frm.vehiculoSeleccionado.IdVehiculo;
             }
-
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            if (!ValidarFormulario(out decimal costo, out int idTipoMantenimiento))
+                return;
+
             MantenimientosDao mantenimientosDao = new MantenimientosDao();
             Mantenimientos mantenimiento = new Mantenimientos()
             {
-                IdVehiculo = id_vehiculo,
+                IdVehiculo = idVehiculo,
                 Fecha = dtpFechaMantenimiento.Value.Date,
-                Costo = decimal.Parse(txtCosto.Text),
-                Observaciones = txtObservaciones.Text,
-                IdTipoMantenimiento = Convert.ToInt32(cbxTipoMantenimiento.SelectedValue)
+                Costo = costo,
+                Observaciones = txtObservaciones.Text.Trim(),
+                IdTipoMantenimiento = idTipoMantenimiento
             };
-            /*MessageBox.Show($"{mantenimiento.IdVehiculo}\n {mantenimiento.Fecha}\n {mantenimiento.Costo}\n {mantenimiento.Observaciones}\n {mantenimiento.IdTipoMantenimiento}");
-            return;*/
 
             try
             {
                 var id = mantenimientosDao.Insert(mantenimiento);
 
-
                 if (id > 0)
                 {
-                    MessageBox.Show("El mantenimiento se registro con éxito" + id,
-                        "Éxito", MessageBoxButtons.OK,
+                    MessageBox.Show($"El mantenimiento se registro con exito. Codigo generado: {id}",
+                        "Exito", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
 
                     DialogResult = DialogResult.OK;
-
-                    this.Close();
+                    Close();
                 }
                 else
                 {
-                    MessageBox.Show("Mantenimiento registrado sin éxito",
+                    MessageBox.Show("No se pudo registrar el mantenimiento.",
                         "Error", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
-
             }
             catch (ApplicationException ex)
             {
@@ -84,17 +70,46 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
             }
         }
 
+        private bool ValidarFormulario(out decimal costo, out int idTipoMantenimiento)
+        {
+            costo = 0;
+            idTipoMantenimiento = 0;
+
+            if (idVehiculo <= 0)
+            {
+                MessageBox.Show("Debe asociar un vehiculo antes de registrar el mantenimiento.", "Validacion",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (!decimal.TryParse(txtCosto.Text, out costo) || costo <= 0)
+            {
+                MessageBox.Show("Ingrese un costo valido mayor que cero.", "Validacion",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCosto.Focus();
+                return false;
+            }
+
+            if (cbxTipoMantenimiento.SelectedValue == null || !int.TryParse(cbxTipoMantenimiento.SelectedValue.ToString(), out idTipoMantenimiento) || idTipoMantenimiento <= 0)
+            {
+                MessageBox.Show("Seleccione un tipo de mantenimiento valido.", "Validacion",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cbxTipoMantenimiento.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
         private void frmInsertarMantenimientos_Load(object sender, EventArgs e)
         {
             CargarTiposMantenimiento();
-
         }
 
         private void CargarTiposMantenimiento(int? idSeleccionado = null)
         {
             TiposMantenimientoDao tiposMantenimientoDao = new TiposMantenimientoDao();
-            var tipos = tiposMantenimientoDao.GetAll(); 
-
+            var tipos = tiposMantenimientoDao.GetAll();
 
             tipos.Insert(0, new TiposMantenimiento
             {
@@ -106,11 +121,13 @@ namespace VehiculoDB.Formularios.FormsMantenimientos
             cbxTipoMantenimiento.DisplayMember = "NombreTipo";
             cbxTipoMantenimiento.ValueMember = "IdTipoMantenimiento";
 
+            if (idSeleccionado.HasValue)
+                cbxTipoMantenimiento.SelectedValue = idSeleccionado.Value;
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

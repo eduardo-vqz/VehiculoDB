@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Data;
 using VehiculoDB.Core.Clases;
 using VehiculoDB.Core.Lib;
@@ -12,7 +12,7 @@ namespace VehiculoDB.Core.Dao
 
         public bool Delete(int idPropietario)
         {
-            try 
+            try
             {
                 Con = OpenDb();
                 command = new SqlCommand(@"DELETE FROM Propietarios WHERE IdPropietario = @Id;", Con);
@@ -21,12 +21,12 @@ namespace VehiculoDB.Core.Dao
                 return command.ExecuteNonQuery() == 1;
             }
             catch (SqlException ex) when (ex.Number == 547)
-            { 
-                throw new ApplicationException("No se puede eliminar: " +
-                    "El propietario esta asociado a un vehículo." + ex);
+            {
+                throw new ApplicationException("No se puede eliminar: el propietario esta asociado a un vehiculo.", ex);
             }
-            finally { 
-            command?.Dispose();
+            finally
+            {
+                command?.Dispose();
                 CloseDb();
             }
         }
@@ -46,7 +46,7 @@ namespace VehiculoDB.Core.Dao
 
                 if (!string.IsNullOrWhiteSpace(filtro))
                 {
-                    sql = sql.Replace("/**where**/", "WHERE Nombre LIKE @f OR Apellido LIKE @f OR DUI @f");
+                    sql = sql.Replace("/**where**/", "WHERE Nombre LIKE @f OR Apellido LIKE @f OR DUI LIKE @f");
                 }
                 else
                 {
@@ -55,7 +55,7 @@ namespace VehiculoDB.Core.Dao
 
                 command = new SqlCommand(sql, Con);
                 if (!string.IsNullOrWhiteSpace(filtro))
-                    command.Parameters.Add("@f", System.Data.SqlDbType.NVarChar, 120).Value = $"%{filtro}%";
+                    command.Parameters.Add("@f", SqlDbType.NVarChar, 120).Value = $"%{filtro.Trim()}%";
 
                 rd = command.ExecuteReader();
 
@@ -63,7 +63,10 @@ namespace VehiculoDB.Core.Dao
                 {
                     lista.Add(Map(rd));
                 }
-
+            }
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("No fue posible consultar los propietarios.", ex);
             }
             finally
             {
@@ -83,9 +86,7 @@ namespace VehiculoDB.Core.Dao
             DUI = rd.GetString(3),
             Telefono = rd.IsDBNull(4) ? null : rd.GetString(4),
             Direccion = rd.IsDBNull(5) ? null : rd.GetString(5)
-
         };
-
 
         public Propietario? GetById(int idPropietario)
         {
@@ -99,7 +100,6 @@ namespace VehiculoDB.Core.Dao
                                          FROM Propietarios
                                          WHERE IdPropietario = @Id", Con);
 
-
                 command.Parameters.Add("@Id", SqlDbType.Int).Value = idPropietario;
                 rd = command.ExecuteReader(CommandBehavior.SingleRow);
                 if (!rd.Read())
@@ -107,11 +107,15 @@ namespace VehiculoDB.Core.Dao
 
                 return Map(rd);
             }
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("No fue posible consultar el propietario seleccionado.", ex);
+            }
             finally
             {
                 rd?.Close();
                 command?.Dispose();
-                CloseDb() ;
+                CloseDb();
             }
         }
 
@@ -122,7 +126,7 @@ namespace VehiculoDB.Core.Dao
                 Con = OpenDb();
 
                 command = new SqlCommand(@"INSERT INTO Propietarios (Nombre, Apellido, DUI, Telefono, Direccion)
-                            OUTPUT INSERTED.IdPropietario 
+                            OUTPUT INSERTED.IdPropietario
                             VALUES (@Nombre, @Apellido, @DUI, @Telefono, @Direccion);", Con);
                 command.Parameters.Add("@Nombre", SqlDbType.NVarChar, 100).Value = paPropietario.Nombre;
                 command.Parameters.Add("@Apellido", SqlDbType.NVarChar, 100).Value = paPropietario.Apellido;
@@ -133,11 +137,16 @@ namespace VehiculoDB.Core.Dao
                 var id = command.ExecuteScalar();
                 return Convert.ToInt32(id);
             }
-            catch (SqlException ex) when ( ex.Number == 2627 || ex.Number == 2601 )
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
             {
-                throw new ApplicationException("El DUI ya existe, verifica la información. " + ex);
+                throw new ApplicationException("El DUI ya existe, verifica la informacion.", ex);
             }
-            finally {
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("No fue posible registrar el propietario.", ex);
+            }
+            finally
+            {
                 command?.Dispose();
                 CloseDb();
             }
@@ -155,7 +164,7 @@ namespace VehiculoDB.Core.Dao
                             DUI = @DUI,
                             Telefono = @Telefono,
                             Direccion = @Direccion
-                        WHERE IdPropietario = @id;", Con);
+                        WHERE IdPropietario = @Id;", Con);
 
                 command.Parameters.Add("@Nombre", SqlDbType.NVarChar, 100).Value = paPropietario.Nombre;
                 command.Parameters.Add("@Apellido", SqlDbType.NVarChar, 100).Value = paPropietario.Apellido;
@@ -164,20 +173,20 @@ namespace VehiculoDB.Core.Dao
                 command.Parameters.Add("@Direccion", SqlDbType.NVarChar, 200).Value = (object?)paPropietario.Direccion ?? DBNull.Value;
                 command.Parameters.Add("@Id", SqlDbType.Int).Value = paPropietario.IdPropietario;
                 return command.ExecuteNonQuery() == 1;
-
             }
-
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
+            {
+                throw new ApplicationException("El DUI ya existe, verifica la informacion.", ex);
+            }
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error inesperado: " + ex);
-                
+                throw new ApplicationException("No fue posible actualizar el propietario.", ex);
             }
             finally
             {
                 command?.Dispose();
-                CloseDb();  
+                CloseDb();
             }
-        
         }
     }
 }

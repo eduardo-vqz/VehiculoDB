@@ -1,12 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using VehiculoDB.Core.Clases;
 using VehiculoDB.Core.Dao;
 
@@ -14,7 +5,8 @@ namespace VehiculoDB.Formularios.FromsPropietario
 {
     public partial class frmPropietario : Form
     {
-        private PropietarioDao propietarioDao = new PropietarioDao();
+        private readonly PropietarioDao propietarioDao = new PropietarioDao();
+
         public frmPropietario()
         {
             InitializeComponent();
@@ -36,14 +28,25 @@ namespace VehiculoDB.Formularios.FromsPropietario
             dgvPropietario.Columns.Add(new DataGridViewTextBoxColumn
             { Name = "TelefonoCol", HeaderText = "Telefono", DataPropertyName = "Telefono", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
             dgvPropietario.Columns.Add(new DataGridViewTextBoxColumn
-            { Name = "DireccionCol", HeaderText = "Direción", DataPropertyName = "Direccion", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
+            { Name = "DireccionCol", HeaderText = "Direccion", DataPropertyName = "Direccion", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
         }
 
         private void Cargar(string filtro = "")
         {
-            dgvPropietario.DataSource = propietarioDao.GetAll();
-            dgvPropietario.ClearSelection();
-            dgvPropietario.CurrentCell = null;
+            try
+            {
+                dgvPropietario.DataSource = propietarioDao.GetAll(filtro);
+                dgvPropietario.ClearSelection();
+                dgvPropietario.CurrentCell = null;
+            }
+            catch (ApplicationException ex)
+            {
+                MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void frmPropietario_Load(object sender, EventArgs e)
@@ -61,14 +64,14 @@ namespace VehiculoDB.Formularios.FromsPropietario
 
         private void bntCerrar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private int? GetIdSeleccionado()
         {
             if (dgvPropietario.CurrentRow == null)
             {
-                MessageBox.Show("Debe seleccionar un registo", "Aviso", 
+                MessageBox.Show("Debe seleccionar un registro", "Aviso",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return null;
             }
@@ -87,17 +90,11 @@ namespace VehiculoDB.Formularios.FromsPropietario
                 MessageBox.Show("Seleccione una fila");
                 return;
             }
-            else
-            {
-                MessageBox.Show("Editar" + id.Value);
-            }
 
             frmActualizarPropietario frm = new frmActualizarPropietario(id.Value);
 
             if (frm.ShowDialog() == DialogResult.OK)
                 Cargar();
-
-
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -110,8 +107,8 @@ namespace VehiculoDB.Formularios.FromsPropietario
             }
 
             var respuesta = MessageBox.Show(
-                "¿Desea eliminar el registro seleccionado?", 
-                "Confirmar eliminación",
+                "Desea eliminar el registro seleccionado?",
+                "Confirmar eliminacion",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (respuesta == DialogResult.No)
@@ -133,9 +130,9 @@ namespace VehiculoDB.Formularios.FromsPropietario
             }
             catch (ApplicationException ex)
             {
-                MessageBox.Show("No se pudo eliminar el registro" + ex.Message, 
-                    "Aviso", 
-                    MessageBoxButtons.OK, 
+                MessageBox.Show("No se pudo eliminar el registro. " + ex.Message,
+                    "Aviso",
+                    MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
             }
             catch (Exception ex)
@@ -145,7 +142,6 @@ namespace VehiculoDB.Formularios.FromsPropietario
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
-
         }
     }
 }

@@ -1,35 +1,49 @@
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 
 namespace VehiculoDB.Core.Lib
 {
+    /// <summary>
+    /// Administra la conexion a SQL Server utilizada por los DAO del sistema.
+    /// La clase no muestra mensajes en pantalla; solo lanza excepciones para que la capa de presentacion las gestione.
+    /// </summary>
     internal class Cnn
     {
         private readonly SqlConnection _conexion;
 
         public Cnn()
         {
-            string cadena = ConfigurationManager.ConnectionStrings["SqlConn"].ConnectionString;
-            _conexion = new SqlConnection(cadena);
+            ConnectionStringSettings? configuracion = ConfigurationManager.ConnectionStrings["SqlConn"];
+
+            if (configuracion == null || string.IsNullOrWhiteSpace(configuracion.ConnectionString))
+                throw new InvalidOperationException("No se encontro la cadena de conexion 'SqlConn' en App.config.");
+
+            _conexion = new SqlConnection(configuracion.ConnectionString);
         }
 
+        /// <summary>
+        /// Abre la conexion si se encuentra cerrada y devuelve la instancia activa.
+        /// </summary>
+        /// <returns>Conexion abierta a SQL Server.</returns>
         public SqlConnection OpenDb()
         {
             try
             {
-                if(_conexion.State == ConnectionState.Closed)
+                if (_conexion.State == ConnectionState.Closed)
                     _conexion.Open();
 
                 return _conexion;
             }
-            catch (SqlException ex) {
-                MessageBox.Show("Error al abrir la conexión a la DB: " + ex.Message, "DataBase", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("No fue posible abrir la conexion a la base de datos.", ex);
             }
         }
 
+        /// <summary>
+        /// Cierra la conexion si se encuentra abierta.
+        /// </summary>
         public void CloseDb()
         {
             try
@@ -37,9 +51,9 @@ namespace VehiculoDB.Core.Lib
                 if (_conexion.State != ConnectionState.Closed)
                     _conexion.Close();
             }
-            catch (SqlException ex) {
-                MessageBox.Show("Error al cerrar la conexión: " + ex.Message, "DataBase", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("No fue posible cerrar la conexion a la base de datos.", ex);
             }
         }
     }

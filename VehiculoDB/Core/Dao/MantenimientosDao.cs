@@ -1,10 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
+using Microsoft.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VehiculoDB.Core.Clases;
 using VehiculoDB.Core.Lib;
 
@@ -12,7 +7,6 @@ namespace VehiculoDB.Core.Dao
 {
     internal class MantenimientosDao : Cnn, IMantenimientos
     {
-
         SqlConnection Con = null;
         SqlCommand command = null;
 
@@ -26,9 +20,9 @@ namespace VehiculoDB.Core.Dao
 
                 return command.ExecuteNonQuery() == 1;
             }
-            catch (SqlException ex) 
+            catch (SqlException ex)
             {
-                throw new ApplicationException("No se puede eliminar: " + ex);
+                throw new ApplicationException("No se pudo eliminar el mantenimiento seleccionado.", ex);
             }
             finally
             {
@@ -46,18 +40,18 @@ namespace VehiculoDB.Core.Dao
             {
                 Con = OpenDb();
                 string sql = @"
-                            SELECT Mantenimientos.IdMantenimiento, Vehiculos.IdVehiculo, Vehiculos.Placa, 
-                                    Mantenimientos.Fecha, Mantenimientos.Costo, Mantenimientos.Observaciones, 
-                                    TiposMantenimiento.IdTipoMantenimiento, TiposMantenimiento.NombreTipo
-                            FROM Mantenimientos 
-                            inner join Vehiculos on Vehiculos.IdVehiculo = Mantenimientos.IdVehiculo
-                            inner join TiposMantenimiento on TiposMantenimiento.IdTipoMantenimiento = Mantenimientos.IdTipoMantenimiento
+                            SELECT Mantenimientos.IdMantenimiento, Vehiculos.IdVehiculo, Vehiculos.Placa,
+                                   Mantenimientos.Fecha, Mantenimientos.Costo, Mantenimientos.Observaciones,
+                                   TiposMantenimiento.IdTipoMantenimiento, TiposMantenimiento.NombreTipo
+                            FROM Mantenimientos
+                            INNER JOIN Vehiculos ON Vehiculos.IdVehiculo = Mantenimientos.IdVehiculo
+                            INNER JOIN TiposMantenimiento ON TiposMantenimiento.IdTipoMantenimiento = Mantenimientos.IdTipoMantenimiento
                             /**where**/
-                            ORDER BY IdMantenimiento DESC;";
+                            ORDER BY Mantenimientos.IdMantenimiento DESC;";
 
                 if (!string.IsNullOrWhiteSpace(filtro))
                 {
-                    sql = sql.Replace("/**where**/", "WHERE Vehiculos.Placa LIKE @f ");
+                    sql = sql.Replace("/**where**/", "WHERE Vehiculos.Placa LIKE @f OR TiposMantenimiento.NombreTipo LIKE @f");
                 }
                 else
                 {
@@ -66,7 +60,7 @@ namespace VehiculoDB.Core.Dao
 
                 command = new SqlCommand(sql, Con);
                 if (!string.IsNullOrWhiteSpace(filtro))
-                    command.Parameters.Add("@f", System.Data.SqlDbType.Int).Value = $"%{filtro}%";
+                    command.Parameters.Add("@f", SqlDbType.NVarChar, 120).Value = $"%{filtro.Trim()}%";
 
                 rd = command.ExecuteReader();
 
@@ -74,11 +68,10 @@ namespace VehiculoDB.Core.Dao
                 {
                     lista.Add(Map(rd));
                 }
-
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
-                throw new ApplicationException("Ha sucedido un herror inesperado. " , ex);
+                throw new ApplicationException("No fue posible consultar los mantenimientos.", ex);
             }
             finally
             {
@@ -97,10 +90,9 @@ namespace VehiculoDB.Core.Dao
             Placa = rd.GetString(2),
             Fecha = rd.GetDateTime(3),
             Costo = rd.GetDecimal(4),
-            Observaciones = rd.GetString(5),
+            Observaciones = rd.IsDBNull(5) ? string.Empty : rd.GetString(5),
             IdTipoMantenimiento = rd.GetInt32(6),
             NombreTipo = rd.GetString(7)
-
         };
 
         public int Insert(Mantenimientos paMantenimiento)
@@ -108,10 +100,9 @@ namespace VehiculoDB.Core.Dao
             try
             {
                 Con = OpenDb();
-                MessageBox.Show($"{paMantenimiento.IdVehiculo}\n {paMantenimiento.Fecha.Date}\n {paMantenimiento.Costo}\n {paMantenimiento.Observaciones}\n {paMantenimiento.IdTipoMantenimiento}");
                 command = new SqlCommand(@"
                             INSERT INTO Mantenimientos (IdVehiculo, Fecha, Costo, Observaciones, IdTipoMantenimiento)
-                            OUTPUT INSERTED.IdMantenimiento 
+                            OUTPUT INSERTED.IdMantenimiento
                             VALUES (@IdVehiculo, @Fecha, @Costo, @Observaciones, @IdTipoMantenimiento);", Con);
                 command.Parameters.Add("@IdVehiculo", SqlDbType.Int).Value = paMantenimiento.IdVehiculo;
                 command.Parameters.Add("@Fecha", SqlDbType.Date).Value = paMantenimiento.Fecha.Date;
@@ -124,7 +115,7 @@ namespace VehiculoDB.Core.Dao
             }
             catch (SqlException ex)
             {
-                throw new ApplicationException("Ha ocurrido un error inesperado. " + ex);
+                throw new ApplicationException("No fue posible registrar el mantenimiento.", ex);
             }
             finally
             {
@@ -145,7 +136,7 @@ namespace VehiculoDB.Core.Dao
                             Costo = @Costo,
                             Observaciones = @Observaciones,
                             IdTipoMantenimiento = @IdTipoMantenimiento
-                        WHERE IdMantenimiento = @id;", Con);
+                        WHERE IdMantenimiento = @Id;", Con);
 
                 command.Parameters.Add("@IdVehiculo", SqlDbType.Int).Value = paMantenimiento.IdVehiculo;
                 command.Parameters.Add("@Fecha", SqlDbType.Date).Value = paMantenimiento.Fecha.Date;
@@ -154,13 +145,10 @@ namespace VehiculoDB.Core.Dao
                 command.Parameters.Add("@IdTipoMantenimiento", SqlDbType.Int).Value = paMantenimiento.IdTipoMantenimiento;
                 command.Parameters.Add("@Id", SqlDbType.Int).Value = paMantenimiento.IdMantenimiento;
                 return command.ExecuteNonQuery() == 1;
-
             }
-
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error inesperado: " + ex);
-
+                throw new ApplicationException("No fue posible actualizar el mantenimiento.", ex);
             }
             finally
             {
@@ -169,7 +157,7 @@ namespace VehiculoDB.Core.Dao
             }
         }
 
-        public Mantenimientos GetById(int idMantenimiento)
+        public Mantenimientos? GetById(int idMantenimiento)
         {
             SqlDataReader rd = null;
             try
@@ -177,14 +165,13 @@ namespace VehiculoDB.Core.Dao
                 Con = OpenDb();
 
                 command = new SqlCommand(@"
-                            SELECT Mantenimientos.IdMantenimiento, Vehiculos.IdVehiculo, Vehiculos.Placa, 
-                                    Mantenimientos.Fecha, Mantenimientos.Costo, Mantenimientos.Observaciones, 
-                                    TiposMantenimiento.IdTipoMantenimiento, TiposMantenimiento.NombreTipo
-                            FROM Mantenimientos 
-                            inner join Vehiculos on Vehiculos.IdVehiculo = Mantenimientos.IdVehiculo
-                            inner join TiposMantenimiento on TiposMantenimiento.IdTipoMantenimiento = Mantenimientos.IdTipoMantenimiento
+                            SELECT Mantenimientos.IdMantenimiento, Vehiculos.IdVehiculo, Vehiculos.Placa,
+                                   Mantenimientos.Fecha, Mantenimientos.Costo, Mantenimientos.Observaciones,
+                                   TiposMantenimiento.IdTipoMantenimiento, TiposMantenimiento.NombreTipo
+                            FROM Mantenimientos
+                            INNER JOIN Vehiculos ON Vehiculos.IdVehiculo = Mantenimientos.IdVehiculo
+                            INNER JOIN TiposMantenimiento ON TiposMantenimiento.IdTipoMantenimiento = Mantenimientos.IdTipoMantenimiento
                             WHERE Mantenimientos.IdMantenimiento = @Id", Con);
-
 
                 command.Parameters.Add("@Id", SqlDbType.Int).Value = idMantenimiento;
                 rd = command.ExecuteReader(CommandBehavior.SingleRow);
@@ -192,6 +179,10 @@ namespace VehiculoDB.Core.Dao
                     return null;
 
                 return Map(rd);
+            }
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("No fue posible consultar el mantenimiento seleccionado.", ex);
             }
             finally
             {
